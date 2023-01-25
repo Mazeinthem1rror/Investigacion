@@ -10,7 +10,9 @@ options(scipen=999)
 rm(list=(ls()))
 
 # 2. Carga de paquetes---------------------------------------------
-pacman::p_load(haven, tidyverse, sjPlot, codebook)
+pacman::p_load(haven, tidyverse, sjPlot, codebook, memisc)
+library(memisc)
+install.packages("BiocManager")
 
 # 3. Carga de BBDD------------------------------------------------
 load(file = "input/data/data_list.RData")
@@ -49,10 +51,11 @@ data <- data %>%
     TRUE ~ list))
 table(data$list,exclude = F)
 
+data <- data %>% select(-c(control2, trat1.2, trat2.2))
+
 #borrar las variables: control2, trat1.2, trat2.2
 # 3.6. Geographic area ----------------------------------------------------
 
-#Comuna to region
 #Comuna to region
 table(data$comuna,exclude = F)
 
@@ -195,4 +198,9 @@ table(data$region, exclude = F)
 view_df(data)
 codebk <- codebook_table(data)
 library(xlsx)
+write.xlsx(codebk, file="Data/Codebook.xlsx", sheetName = "Sheet1", 
+           col.names = TRUE, row.names = TRUE, append = FALSE)
+codebk <- within(codebk, {
+  description(control2) <- "Elementos que apoya"
+  })
 
