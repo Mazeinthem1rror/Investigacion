@@ -436,12 +436,11 @@ data$direct2<- set_label(data$direct2, label = "Dificultad de aprendizaje en Map
 
 view_df(data)
 
-
-#Esto pendiente
 codebk <- codebook_table(data)
 library(xlsx)
 write.xlsx(codebk, file="Data/Codebook.xlsx", sheetName = "Sheet1", 
            col.names = TRUE, row.names = TRUE, append = FALSE)
+
 
 
 
