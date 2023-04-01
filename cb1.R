@@ -441,6 +441,8 @@ library(xlsx)
 write.xlsx(codebk, file="Data/Codebook.xlsx", sheetName = "Sheet1", 
            col.names = TRUE, row.names = TRUE, append = FALSE)
 
+saveRDS(data, file= "output/data/datos_proc.rds")
+
 
 
 
